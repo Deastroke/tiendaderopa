@@ -45,7 +45,7 @@ if (user && 'serviceWorker' in navigator && 'PushManager' in window) {
               console.log('Suscripción creada:', subscription);
 
               // Enviar la suscripción al servidor
-              const response = await fetch('http://localhost:3000/api/suscripciones/subscribe', {
+              const response = await fetch('https://hotelbosqueencantadoserver.onrender.com/api/suscripciones/subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -107,7 +107,7 @@ export function login(event) {
     password: password,
   };
 
-  fetch('http://localhost:3000/api/users/login', {
+  fetch('https://hotelbosqueencantadoserver.onrender.com/api/users/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -130,10 +130,11 @@ export function login(event) {
 
     // Mostrar una alerta de éxito con SweetAlert2
     Swal.fire({
-      title: 'Login exitoso!',
+      title: 'Acceso autorizado!',
       text: 'Hola ' + data.user.name, // Puedes mostrar el nombre del usuario si lo tienes
       icon: 'success',
       confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#088395'
     }).then(() => {
       // Redirigir a la página principal después de que el usuario presione "Aceptar"
       window.location.href = '/'; // Redirige a la página principal
@@ -148,6 +149,8 @@ export function login(event) {
       title: 'Error en el inicio de sesión',
       text: 'Por favor, revisa tus credenciales.',
       icon: 'error',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#088395'
     });
   });
 }
@@ -167,7 +170,7 @@ export function insertar(event) {
     password: password,
   };
 
-  fetch('http://localhost:3000/api/users/create-user', {
+  fetch('https://hotelbosqueencantadoserver.onrender.com/api/users/create-user', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -185,10 +188,11 @@ export function insertar(event) {
 
       // Mostrar alerta de éxito con SweetAlert2
       Swal.fire({
-        title: 'Cuenta creada!',
-        text: 'Tu cuenta ha sido creada exitosamente. ¡Bienvenido!',
+        title: 'Registro completado!',
+        text: 'Tu cuenta se ha registrado con éxito. ¡Bienvenido!',
         icon: 'success',
         confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#088395'
       });
   })
   .catch(async (error) => {
@@ -198,9 +202,10 @@ export function insertar(event) {
         // Guardar datos solo si el error es de conexión
         Swal.fire({
             title: 'Sin conexión',
-            text: 'No tienes conexión a internet. Guardaremos tus datos para intentarlo más tarde.',
+            text: 'No tienes conexión a internet. Tus datos se guardarán y se intentará nuevamente más tarde.',
             icon: 'warning',
             confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#088395'
         });
         guardarEnIndexedDB(name, lastname, email, password);
 
@@ -227,6 +232,7 @@ export function insertar(event) {
         text: errorMessage,
         icon: 'error',
         confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#088395'
     });
   });
 }

@@ -1,17 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; // Asumiendo que tienes el contexto de autenticación
 import logo from '../assets/img/logo.png';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
 export default function Dashboard() {
     const { user, logout } = useAuth(); // Obtener usuario y la función de logout
     const navigate = useNavigate();
 
-    // Redirigir al Index si no hay usuario
-    if (!user) {
-        navigate('/');
-    }
+    // Redirigir al Index si no hay usuario (ahora dentro de useEffect)
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
+        }
+    }, [user, navigate]); // Se ejecuta cuando 'user' cambia
+
+    // // Redirigir al Index si no hay usuario
+    // if (!user) {
+    //     navigate('/');
+    // }
 
     const [checkInDate, setCheckInDate] = useState('');
     const [checkOutDate, setCheckOutDate] = useState('');
