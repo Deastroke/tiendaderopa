@@ -79,7 +79,7 @@ self.addEventListener('push', event => {
 });
 
 self.addEventListener('fetch', event => {
-    if (event.request.url.includes('http://localhost:3000/api/users/create-user')) {
+    if (event.request.url.includes('https://hotelbosqueencantadoserver.onrender.com/api/users/create-user')) {
         event.respondWith(
             fetch(event.request).catch(() => {
                 if ('SyncManager' in self) {
@@ -122,7 +122,7 @@ function procesarRegistros(result) {
           let currentValue = cursor.value;
 
           // Enviar los datos a la API
-          fetch('http://localhost:3000/api/users/create-user', {
+          fetch('https://hotelbosqueencantadoserver.onrender.com/api/users/create-user', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
