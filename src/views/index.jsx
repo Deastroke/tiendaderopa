@@ -1,188 +1,186 @@
-import { useState } from "react";
-import { IoSearch, IoMenu, IoClose } from "react-icons/io5";
-import { Link as ScrollLink } from "react-scroll";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import banner from '../assets/img/banner.jpg';
+import logo from '../assets/img/logo.png';
+import img1 from '../assets/img/campana.png';
+import img2 from '../assets/img/montanas.png';
+import img3 from '../assets/img/spa.png';
+import img4 from '../assets/img/fuente-termal.png';
+import img5 from '../assets/img/fogata.png';
+import img6 from '../assets/img/organizador.png';
+import imgh1 from '../assets/img/estandar.webp';
+import imgh2 from '../assets/img/delux.png';
+import imgh3 from '../assets/img/presidencial.png';
 
 export default function Index() {
-    const [isOpen, setIsOpen] = useState(false);
     const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    // Redirigir al Dashboard si el usuario está logueado
+    if (user) {
+        navigate('/home');
+    }
+
     return (
-        <>
-            <nav className="sticky top-0 w-full bg-white shadow-sm z-50">
-                <div className="container mx-auto flex items-center justify-between p-4 lg:p-0">
-                    {/* Logo */}
-                    <div className="flex items-center">
-                        <img className="w-[50px] h-[50px] sm:w-[75px] sm:h-[75px]" src="/Symphony.png"
-                             alt="Symphony Logo"/>
-                    </div>
-
-                    {/* Menu icon for mobile */}
-                    <div className="lg:hidden">
-                        <button onClick={() => setIsOpen(!isOpen)}>
-                            {isOpen ? <IoClose className="w-8 h-8"/> : <IoMenu className="w-8 h-8"/>}
-                        </button>
-                    </div>
-
-                    {/* Links and search bar for larger screens */}
-                    <div className="hidden lg:flex items-center space-x-5">
-                        <ScrollLink to="home" spy={true} smooth={true} offset={-70} duration={500}
-                                    className="font-medium text-lg sm:text-xl hover:text-secondary transition duration-300 ease-in-out">
-                            Inicio
-                        </ScrollLink>
-                        <ScrollLink to="about-us" spy={true} smooth={true} offset={-70} duration={500}
-                                    className="font-medium text-lg sm:text-xl hover:text-secondary transition duration-300 ease-in-out">
-                            Nosotros
-                        </ScrollLink>
-                        <div className="relative flex items-center text-gray-500">
-                            <IoSearch className="absolute ml-3 w-5 h-5"/>
-                            <input
-                                type="text"
-                                name="search"
-                                placeholder="Buscar..."
-                                className="w-full sm:w-40 lg:w-56 py-2 pl-10 pr-3 font-semibold text-black placeholder-gray-500 rounded-lg border-none ring-2 ring-gray-300"
-                            />
-                        </div>
-                        {!user ? (
-                            <>
-                                <Link
-                                    to="/login"
-                                    className="text-dark_complementary font-semibold bg-white border-2 border-secondary py-2 px-3 rounded-lg hover:bg-complementary hover:border-complementary hover:text-white transition duration-500 ease-in-out"
-                                >
-                                    Iniciar sesión
-                                </Link>
-                                <Link
-                                    to="/sign-up"
-                                    className="text-white font-semibold bg-secondary border-2 border-secondary py-2 px-3 rounded-lg hover:bg-white hover:border-complementary hover:text-dark_complementary transition duration-500 ease-in-out"
-                                >
-                                    Crear cuenta
-                                </Link>
-                            </>
-                        ) : (
-                            <>
-                                <p className="font-medium text-lg sm:text-xl">¡Hola {user.name}!</p>
-                                <button
-                                    onClick={logout}
-                                    className="text-white font-semibold bg-secondary border-2 border-secondary py-2 px-3 rounded-lg hover:bg-white hover:border-complementary hover:text-dark_complementary transition duration-500 ease-in-out"
-                                >
-                                    Cerrar sesión
-                                </button>
-                            </>
-                        )}
-                    </div>
+        <div className="min-h-screen flex flex-col bg-background text-foreground">
+            <nav className="flex flex-col gap-y-3 md:flex-row justify-between items-center px-8 py-4 bg-primary text-white">
+                <div className="flex items-center">
+                    <img
+                        src={logo} 
+                        alt="Hotel Icon"
+                        width={32} 
+                        height={32}
+                        className="mr-4"
+                    />
+                    <span className="text-xl font-poppins font-semibold">Bosque Encantado</span>
                 </div>
 
-                {/* Mobile menu */}
-                {isOpen && (
-                    <div
-                        className="absolute top-0 left-0 w-full h-screen bg-white z-40 flex flex-col items-center p-8 space-y-6 text-center shadow-lg lg:hidden">
-                        {/* Close button */}
-                        <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-gray-700">
-                            <IoClose className="w-8 h-8"/>
-                        </button>
-
-                        <ScrollLink
-                            to="home"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                            className="w-full py-4 text-lg font-medium text-gray-700 hover:bg-gray-100 rounded-lg"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Inicio
-                        </ScrollLink>
-                        <ScrollLink
-                            to="about-us"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                            className="w-full py-4 text-lg font-medium text-gray-700 hover:bg-gray-100 rounded-lg"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Nosotros
-                        </ScrollLink>
-                        <div className="w-full flex items-center justify-center relative text-gray-500">
-                            <IoSearch className="absolute left-3 w-5 h-5"/>
-                            <input
-                                type="text"
-                                name="search"
-                                placeholder="Buscar..."
-                                className="w-full py-2 pl-10 pr-3 font-semibold text-black placeholder-gray-500 rounded-lg border-none ring-2 ring-gray-300"
-                            />
-                        </div>
-                        {!user ? (
-                            <>
-                                <Link
-                                    to="/login"
-                                    className="w-full py-3 text-dark_complementary font-semibold bg-white border-2 border-secondary rounded-lg hover:bg-complementary hover:border-complementary hover:text-white transition duration-500 ease-in-out"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    Iniciar sesión
-                                </Link>
-                                <Link
-                                    to="/sign-up"
-                                    className="w-full py-3 text-white font-semibold bg-secondary border-2 border-secondary rounded-lg hover:bg-white hover:border-complementary hover:text-dark_complementary transition duration-500 ease-in-out"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    Crear cuenta
-                                </Link>
-                            </>
-                        ) : (
-                            <>
-                                <p className="font-medium text-lg sm:text-xl">¡Hola {user.name}!</p>
-                                <button
-                                    onClick={() => {
-                                        logout();
-                                        setIsOpen(false);
-                                    }}
-                                    className="w-full py-3 text-white font-semibold bg-secondary border-2 border-secondary rounded-lg hover:bg-white hover:border-complementary hover:text-dark_complementary transition duration-500 ease-in-out"
-                                >
-                                    Cerrar sesión
+                <div className="flex items-center space-x-4">
+                    {/* Si no hay usuario */}
+                    {!user ? (
+                        <>
+                            <Link to="/login">
+                                <button className="bg-transparent font-poppins font-medium text-white py-2 px-3 mr-2 hover:font-semibold hover:text-secondary rounded-full hover:bg-gray-100">
+                                    Iniciar Sesión
                                 </button>
-                            </>
-                        )}
-                    </div>
-                )}
+                            </Link>
+                            <Link to="/sign-up">
+                                <button className="bg-transparent font-poppins font-medium text-white py-2 px-3 hover:font-semibold hover:text-secondary rounded-full hover:bg-gray-100">
+                                    Registrarse
+                                </button>
+                            </Link>
+                        </>
+                    ) : (
+                        // Si hay un usuario autenticado
+                        <>
+                            <p className="font-medium text-lg sm:text-xl">¡Hola {user.name}!</p>
+                            <button
+                                onClick={logout}
+                                className="bg-transparent font-poppins font-medium text-white py-2 px-3 hover:font-semibold hover:text-secondary rounded-full hover:bg-gray-100"
+                            >
+                                Cerrar sesión
+                            </button>
+                        </>
+                    )}
+                </div>
             </nav>
 
-            <body>
-            <section id="home" className="px-5">
-                <div className="flex flex-col lg:flex-row items-center justify-around mt-20 lg:mt-40 mb-16 lg:mb-32">
-                    <div className="text-center lg:text-left w-full lg:w-1/2 items-center">
-                        <h1 className="text-4xl lg:text-6xl font-bold">
-                            Descubre una experiencia única al escuchar música
-                        </h1>
-                        <p className="mt-6 lg:mt-10 text-xl lg:text-3xl">
-                            Symphony está a punto de hacer su debut y cambiará la forma en que disfrutas tus canciones.
-                        </p>
-                    </div>
-                    <img src="https://static1.pocketlintimages.com/wordpress/wp-content/uploads/2023/04/apple-music.jpg"
-                         className="h-64 w-80 sm:h-[300px] sm:w-[400px] lg:h-[400px] lg:w-[600px] rounded-3xl mt-5 lg:mt-0" alt={""}/>
+            {/* Sección Hero */}
+            <section className="relative bg-blue-200 text-center py-20">
+                <div className="absolute inset-0 opacity-80">
+                    <img
+                        src={banner}
+                        alt="Hotel Banner"
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+                <div className="relative z-10 text-white">
+                    <h1 className="text-5xl font-black font-poppins">Hotel Bosque Encantado</h1>
+                    <p className="mt-4 text-lg font-poppins">
+                        Disfruta de una experiencia única rodeado de naturaleza y confort.
+                    </p>
+                    <Link to="/login">
+                        <button className="mt-6 bg-white text-secondary font-bold font-poppins py-3 px-8 rounded-full hover:bg-gray-100">
+                            Haz tu Reservación
+                        </button>
+                    </Link>
                 </div>
             </section>
 
-            <section id="about-us" className="px-5">
-                <div
-                    className="flex flex-col lg:flex-row items-center lg:h-1/2 justify-around mt-16 lg:mt-32 mb-16 lg:mb-32">
-                    <img src="https://ijunkie.com/wp-content/uploads/2023/03/Apple-Music-iOS-16.4-1280x960.jpeg"
-                         className="h-64 w-80 sm:h-[300px] sm:w-[400px] lg:h-[470px] lg:w-[600px] rounded-3xl mb-5 lg:mb-0" alt={""}/>
-                    <div className="text-center lg:text-left w-full lg:w-1/2 items-center">
-                        <h1 className="text-4xl lg:text-6xl font-bold text-center lg:text-left">Nosotros</h1>
-                        <p className="mt-6 lg:mt-10 text-lg lg:text-2xl text-justify">
-                            Symphony surge a raíz de variadas necesidades de nuestra audiencia y las limitaciones en
-                            otras plataformas musicales.
-                            Nos hemos dedicado a entender las expectativas del público y a abordar las deficiencias en
-                            la experiencia musical actual.
-                            Estamos emocionados de presentar una solución que redefine la forma en que experimentas la
-                            música, diseñada específicamente para satisfacer tus preferencias y elevar tu disfrute
-                            auditivo a un nuevo nivel.
+            {/* Descripción del Hotel */}
+            <section className="py-12 px-10 bg-white text-center">
+                <h2 className="text-3xl font-bold font-poppins">Acerca de Nosotros</h2>
+                <p className="mt-8 text-lg text-gray-600 font-poppins">
+                    En  Bosque Encantado, nuestra historia nace del amor por la naturaleza y el deseo de ofrecer un espacio donde las personas puedan desconectar y disfrutar de su belleza. Desde 2021, hemos sido un santuario para quienes buscan aventura y tranquilidad en un entorno natural.<br/><br/>
+                    Ubicado en un hermoso bosque, nuestro refugio cuenta con acogedoras cabañas y zonas de camping equipadas. Nuestro equipo se dedica a brindar experiencias memorables, desde actividades al aire libre hasta momentos de relajación bajo las estrellas.<br/><br/>
+                    Te invitamos a formar parte de nuestra historia y crear recuerdos inolvidables en el Hotel Bosque Encantado.
+                </p>
+            </section>
+
+            {/* Servicios del Hotel */}
+            <section className="py-12 px-6 bg-gray-100">
+                <h2 className="text-3xl font-bold text-center font-poppins">Nuestros Servicios</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img
+                            src={img1}
+                            alt="Alojamiento Confortable"
+                            width={100} 
+                            height={100}
+                            className="mb-4"
+                        />
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Alojamiento Confortable</h3>
+                        <p className="font-poppins text-base text-gray-700">
+                            Disfruta de nuestras acogedoras cabañas y zonas de camping equipadas, ideales para una estancia relajante en medio de la naturaleza.
+                        </p>
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img
+                            src={img2}
+                            alt="Actividades al Aire Libre"
+                            width={100} 
+                            height={100}
+                            className="mb-4"
+                        />
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Actividades al Aire Libre</h3>
+                        <p className="font-poppins text-base text-gray-700">
+                            Participa en senderismo, paseos en bicicleta y excursiones guiadas para explorar la belleza del bosque y sus alrededores.
+                        </p>
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img
+                            src={img3}
+                            alt="Spa y Bienestar"
+                            width={100} 
+                            height={100}
+                            className="mb-4"
+                        />
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Spa y Bienestar</h3>
+                        <p className="font-poppins text-base text-gray-700">
+                            Relájate y rejuvenece en nuestro spa, donde ofrecemos masajes, tratamientos de belleza y sesiones de yoga al aire libre.
+                        </p>
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img
+                            src={img4}
+                            alt="Piscinas de Aguas Termales"
+                            width={100} 
+                            height={100} 
+                            className="mb-4"
+                        />
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Piscinas de Aguas Termales</h3>
+                        <p className="font-poppins text-base text-gray-700">
+                            Sumérgete en nuestras piscinas de aguas termales, perfectas para relajarte y disfrutar de los beneficios terapéuticos de estas aguas en un entorno natural.
+                        </p>
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img
+                            src={img5}
+                            alt="Fogatas Nocturnas"
+                            width={100} 
+                            height={100}
+                            className="mb-4"
+                        />
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Fogatas Nocturnas</h3>
+                        <p className="font-poppins text-base text-gray-700">
+                            Comparte momentos especiales junto a la fogata, disfrutando de música, historias y malvaviscos asados bajo las estrellas.
+                        </p>
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img
+                            src={img6}
+                            alt="Fogatas Nocturnas"
+                            width={100} 
+                            height={100} 
+                            className="mb-4"
+                        />
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Eventos Especiales</h3>
+                        <p className="font-poppins text-base text-gray-700">
+                            Organizamos eventos y actividades exclusivas para grupos, como bodas, reuniones familiares y retiros corporativos.
                         </p>
                     </div>
                 </div>
             </section>
-            </body>
-        </>
-    )
+        </div>
+    );
 }
