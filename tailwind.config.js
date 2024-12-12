@@ -9,9 +9,9 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: '#071952', // Azul para botones o links
-        secondary: '#088395', // Verde para otros elementos
-        highlight: '#f2994a', // Naranja para resaltar 
+        primary: '#000000', // Azul para botones o links
+        secondary: '#008080', // Verde para otros elementos
+        highlight: '#800080', // Naranja para resaltar 
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'], // Asegúrate de tener esta línea

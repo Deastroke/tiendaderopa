@@ -1,16 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import banner from '../assets/img/banner.jpg';
+import banner from '../assets/img/banner1.jpg';
 import logo from '../assets/img/logo.png';
-import img1 from '../assets/img/campana.png';
-import img2 from '../assets/img/montanas.png';
-import img3 from '../assets/img/spa.png';
-import img4 from '../assets/img/fuente-termal.png';
-import img5 from '../assets/img/fogata.png';
-import img6 from '../assets/img/organizador.png';
-import imgh1 from '../assets/img/estandar.webp';
-import imgh2 from '../assets/img/delux.png';
-import imgh3 from '../assets/img/presidencial.png';
+import img1 from '../assets/img/asesoria.png';
+import img2 from '../assets/img/modificar.png';
+import img3 from '../assets/img/ropa.png';
+// import img4 from '../assets/img/fuente-termal.png';
+// import img5 from '../assets/img/fogata.png';
+// import img6 from '../assets/img/ropa.png';
+import img4 from '../assets/img/fidelidad.png';
+import img5 from '../assets/img/domicilio.png';
+import img6 from '../assets/img/ropa.png';
 
 export default function Index() {
     const { user, logout } = useAuth();
@@ -32,7 +32,7 @@ export default function Index() {
                         height={32}
                         className="mr-4"
                     />
-                    <span className="text-xl font-poppins font-semibold">Bosque Encantado</span>
+                    <span className="text-xl font-poppins font-semibold">Trendy Closet</span>
                 </div>
 
                 <div className="flex items-center space-x-4">
@@ -75,13 +75,13 @@ export default function Index() {
                     />
                 </div>
                 <div className="relative z-10 text-white">
-                    <h1 className="text-5xl font-black font-poppins">Hotel Bosque Encantado</h1>
+                    <h1 className="text-5xl font-black font-poppins">Trendy Closet</h1>
                     <p className="mt-4 text-lg font-poppins">
-                        Disfruta de una experiencia única rodeado de naturaleza y confort.
+                    Viste con estilo, siéntete única."
                     </p>
                     <Link to="/login">
                         <button className="mt-6 bg-white text-secondary font-bold font-poppins py-3 px-8 rounded-full hover:bg-gray-100">
-                            Haz tu Reservación
+                            Haz tu Pedido
                         </button>
                     </Link>
                 </div>
@@ -91,9 +91,7 @@ export default function Index() {
             <section className="py-12 px-10 bg-white text-center">
                 <h2 className="text-3xl font-bold font-poppins">Acerca de Nosotros</h2>
                 <p className="mt-8 text-lg text-gray-600 font-poppins">
-                    En  Bosque Encantado, nuestra historia nace del amor por la naturaleza y el deseo de ofrecer un espacio donde las personas puedan desconectar y disfrutar de su belleza. Desde 2021, hemos sido un santuario para quienes buscan aventura y tranquilidad en un entorno natural.<br/><br/>
-                    Ubicado en un hermoso bosque, nuestro refugio cuenta con acogedoras cabañas y zonas de camping equipadas. Nuestro equipo se dedica a brindar experiencias memorables, desde actividades al aire libre hasta momentos de relajación bajo las estrellas.<br/><br/>
-                    Te invitamos a formar parte de nuestra historia y crear recuerdos inolvidables en el Hotel Bosque Encantado.
+                Bienvenidos a Trendy Closet, tu destino ideal para encontrar las últimas tendencias en moda y estilo. Nos apasiona ofrecerte ropa de alta calidad, cómoda y elegante, diseñada para que te sientas increíble cada día.
                 </p>
             </section>
 
@@ -109,9 +107,9 @@ export default function Index() {
                             height={100}
                             className="mb-4"
                         />
-                        <h3 className="text-xl font-bold mb-2 font-poppins">Alojamiento Confortable</h3>
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Asesoría de Estilo Personalizada</h3>
                         <p className="font-poppins text-base text-gray-700">
-                            Disfruta de nuestras acogedoras cabañas y zonas de camping equipadas, ideales para una estancia relajante en medio de la naturaleza.
+                        Ayuda a los clientes a encontrar prendas que resalten su estilo y personalidad. Ofrece consultas en tienda o virtuales.
                         </p>
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
@@ -122,9 +120,9 @@ export default function Index() {
                             height={100}
                             className="mb-4"
                         />
-                        <h3 className="text-xl font-bold mb-2 font-poppins">Actividades al Aire Libre</h3>
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Modificaciones y Alteraciones</h3>
                         <p className="font-poppins text-base text-gray-700">
-                            Participa en senderismo, paseos en bicicleta y excursiones guiadas para explorar la belleza del bosque y sus alrededores.
+                        Ajusta las prendas a las medidas y preferencias del cliente. Ofrece servicios como acortar mangas o cambiar botones.
                         </p>
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
@@ -135,9 +133,9 @@ export default function Index() {
                             height={100}
                             className="mb-4"
                         />
-                        <h3 className="text-xl font-bold mb-2 font-poppins">Spa y Bienestar</h3>
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Entrega a Domicilio</h3>
                         <p className="font-poppins text-base text-gray-700">
-                            Relájate y rejuvenece en nuestro spa, donde ofrecemos masajes, tratamientos de belleza y sesiones de yoga al aire libre.
+                        Realiza entregas rápidas a la puerta de los clientes, ya sea dentro de un área local o mediante envíos a nivel nacional.
                         </p>
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
@@ -148,9 +146,9 @@ export default function Index() {
                             height={100} 
                             className="mb-4"
                         />
-                        <h3 className="text-xl font-bold mb-2 font-poppins">Piscinas de Aguas Termales</h3>
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Programas de Fidelidad</h3>
                         <p className="font-poppins text-base text-gray-700">
-                            Sumérgete en nuestras piscinas de aguas termales, perfectas para relajarte y disfrutar de los beneficios terapéuticos de estas aguas en un entorno natural.
+                            Premia a los clientes frecuentes con puntos o descuentos exclusivos. Acceso anticipado a colecciones y promociones.
                         </p>
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
@@ -161,9 +159,9 @@ export default function Index() {
                             height={100}
                             className="mb-4"
                         />
-                        <h3 className="text-xl font-bold mb-2 font-poppins">Fogatas Nocturnas</h3>
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Cambios y Devoluciones Sencillas</h3>
                         <p className="font-poppins text-base text-gray-700">
-                            Comparte momentos especiales junto a la fogata, disfrutando de música, historias y malvaviscos asados bajo las estrellas.
+                        Facilita un proceso ágil para cambios y devoluciones. Sin complicaciones, en tienda o por correo.
                         </p>
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
@@ -174,9 +172,9 @@ export default function Index() {
                             height={100} 
                             className="mb-4"
                         />
-                        <h3 className="text-xl font-bold mb-2 font-poppins">Eventos Especiales</h3>
+                        <h3 className="text-xl font-bold mb-2 font-poppins">Personalización de Prendas</h3>
                         <p className="font-poppins text-base text-gray-700">
-                            Organizamos eventos y actividades exclusivas para grupos, como bodas, reuniones familiares y retiros corporativos.
+                        Personaliza ropa con bordados, estampados o detalles únicos. Ofrece opciones que hagan la prenda más especial para cada cliente.
                         </p>
                     </div>
                 </div>

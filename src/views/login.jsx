@@ -25,7 +25,7 @@ export default function Login() {
                         height={32}
                         className="mr-4"
                     />
-                    <span className="text-xl font-poppins font-semibold">Bosque Encantado</span>
+                    <span className="text-xl font-poppins font-semibold">Trendy Closet</span>
                 </div>
             </nav>
             <div className="min-h-screen flex flex-col justify-center bg-gray-50 sm:px-6 lg:px-8 font-poppins">

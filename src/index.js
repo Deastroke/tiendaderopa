@@ -45,7 +45,7 @@ if (user && 'serviceWorker' in navigator && 'PushManager' in window) {
               console.log('Suscripción creada:', subscription);
 
               // Enviar la suscripción al servidor
-              const response = await fetch('https://hotelbosqueencantadoserver.onrender.com/api/suscripciones/subscribe', {
+              const response = await fetch('https://tiendaderopa-server.onrender.com/api/suscripciones/subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -107,7 +107,7 @@ export function login(event) {
     password: password,
   };
 
-  fetch('https://hotelbosqueencantadoserver.onrender.com/api/users/login', {
+  fetch('https://tiendaderopa-server.onrender.com/api/users/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -170,7 +170,7 @@ export function insertar(event) {
     password: password,
   };
 
-  fetch('https://hotelbosqueencantadoserver.onrender.com/api/users/create-user', {
+  fetch('https://tiendaderopa-server.onrender.com/api/users/create-user', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
