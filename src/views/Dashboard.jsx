@@ -33,9 +33,9 @@ export default function Dashboard() {
     };
 
     const roomDescriptions = {
-        single: 'Prenda cómoda y versátil con corte ajustado, ideal para ocasiones informales. Disponible en varios colores, con tela suave y transpirable, perfecta para el día a día.',
-        double: 'Blusa de diseño sofisticado con detalles en encaje y tela de alta calidad. Ideal para cenas, eventos o una salida especial, garantizando estilo y comodidad.',
-        suite: 'Vestido de gala con corte a la medida, bordado a mano y tela de seda. Perfecto para ocasiones exclusivas, ofreciendo un look elegante y único para deslumbrar en cualquier evento.',
+        single: 'Habitación cómoda y bien equipada con cama matrimonial o dos camas individuales, aire acondicionado, TV de pantalla plana y baño privado, ideal para estancias cortas.',
+        double: 'Suite Deluxe equipada con cama matrimonial, sala de estar, minibar y baño privado con jacuzzi, ideal para familias y parejas que buscan lujo y comodidad.',
+        suite: 'Suite de lujo con dormitorio independiente, sala de estar, jacuzzi privado y servicios personalizados, ideal para una escapada inolvidable.',
     };
 
     const calculateTotalPrice = () => {
