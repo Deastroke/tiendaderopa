@@ -8,81 +8,60 @@ export default function Dashboard() {
     const { user, logout } = useAuth(); // Obtener usuario y la función de logout
     const navigate = useNavigate();
 
-    // Redirigir al Index si no hay usuario (ahora dentro de useEffect)
+    // Redirigir al Login si no hay usuario
     useEffect(() => {
         if (!user) {
             navigate('/login');
         }
-    }, [user, navigate]); // Se ejecuta cuando 'user' cambia
+    }, [user, navigate]);
 
-    // // Redirigir al Index si no hay usuario
-    // if (!user) {
-    //     navigate('/');
-    // }
-
-    const [checkInDate, setCheckInDate] = useState('');
-    const [checkOutDate, setCheckOutDate] = useState('');
-    const [selectedRoom, setSelectedRoom] = useState('single');
+    const [selectedProduct, setSelectedProduct] = useState('shirt');
+    const [selectedSize, setSelectedSize] = useState('');
+    const [quantity, setQuantity] = useState(1);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [showConfirmButton, setShowConfirmButton] = useState(false);
 
-    const roomPrices = {
-        single: 800,
-        double: 1200,
-        suite: 2500,
+    const productPrices = {
+        shirt: 500,
+        jeans: 800,
+        dress: 1200,
+        jacket: 1500,
     };
 
-    const roomDescriptions = {
-        single: 'Habitación cómoda y bien equipada con cama matrimonial o dos camas individuales, aire acondicionado, TV de pantalla plana y baño privado, ideal para estancias cortas.',
-        double: 'Suite Deluxe equipada con cama matrimonial, sala de estar, minibar y baño privado con jacuzzi, ideal para familias y parejas que buscan lujo y comodidad.',
-        suite: 'Suite de lujo con dormitorio independiente, sala de estar, jacuzzi privado y servicios personalizados, ideal para una escapada inolvidable.',
+    const productDescriptions = {
+        shirt: 'Camisa casual de alta calidad, ideal para ocasiones informales y formales.',
+        jeans: 'Jeans clásicos, cómodos y duraderos, perfectos para el día a día.',
+        dress: 'Vestido elegante y moderno, diseñado para destacar en cualquier evento.',
+        jacket: 'Chaqueta abrigadora y estilizada, perfecta para temporadas frías.',
     };
 
     const calculateTotalPrice = () => {
-        if (!checkInDate || !checkOutDate) {
+        if (!selectedSize) {
             Swal.fire({
                 title: 'Error',
-                text: 'Por favor, selecciona las fechas de entrada y salida.',
+                text: 'Por favor, selecciona una talla para el producto.',
                 icon: 'warning',
                 confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#088395', // Botón de confirmar
+                confirmButtonColor: '#088395',
             });
             return;
         }
 
-        const checkIn = new Date(checkInDate);
-        const checkOut = new Date(checkOutDate);
-        const timeDifference = checkOut - checkIn;
-        const days = timeDifference / (1000 * 3600 * 24);
-
-        if (days > 0) {
-            setTotalPrice(days * roomPrices[selectedRoom]);
-            setShowConfirmButton(true);
-        } else {
-            Swal.fire({
-                title: 'Error',
-                text: 'La fecha de salida debe ser posterior a la fecha de entrada.',
-                icon: 'error',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#088395', // Botón de confirmar
-            });
-        }
+        setTotalPrice(quantity * productPrices[selectedProduct]);
     };
 
-    const confirmReservation = () => {
+    const confirmPurchase = () => {
         Swal.fire({
-            title: '¡Reserva confirmada!',
-            text: 'Gracias por hacer tu reservación en Bosque Encantado. ¡Te esperamos pronto!',
+            title: '¡Compra confirmada!',
+            text: `Gracias por tu compra de ${quantity} ${selectedProduct}(s). ¡Te esperamos pronto en Trendy Closet!`,
             icon: 'success',
             confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#088395', // Botón de confirmar
+            confirmButtonColor: '#088395',
         }).then(() => {
-            // Limpiar todos los campos después de la confirmación
-            setCheckInDate('');
-            setCheckOutDate('');
-            setSelectedRoom('single');
+            // Limpiar los campos después de la confirmación
+            setSelectedProduct('shirt');
+            setSelectedSize('');
+            setQuantity(1);
             setTotalPrice(0);
-            setShowConfirmButton(false);
         });
     };
 
@@ -95,11 +74,11 @@ export default function Dashboard() {
             showCancelButton: true,
             confirmButtonText: 'Sí, cerrar sesión',
             cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#088395', // Botón de confirmar
-            cancelButtonColor: '#f44336', // Botón de cancelar
+            confirmButtonColor: '#088395',
+            cancelButtonColor: '#f44336',
         }).then((result) => {
             if (result.isConfirmed) {
-                logout(); // Llamamos a la función logout solo si el usuario confirma
+                logout();
             }
         });
     };
@@ -110,16 +89,15 @@ export default function Dashboard() {
                 <div className="flex items-center">
                     <img
                         src={logo}
-                        alt="Hotel Icon"
+                        alt="Tienda Trendy Closet"
                         width={32}
                         height={32}
                         className="mr-4"
                     />
-                    <span className="text-xl font-poppins font-semibold">Bosque Encantado</span>
+                    <span className="text-xl font-poppins font-semibold">Trendy Closet</span>
                 </div>
 
                 <div className="flex items-center space-x-4">
-                    {/* Si el usuario está logueado, mostramos el botón de cerrar sesión */}
                     {user && (
                         <>
                             <p className="font-medium text-base">¡Hola {user.name}!</p>
@@ -134,48 +112,54 @@ export default function Dashboard() {
                 </div>
             </nav>
 
-            {/* Contenido del Dashboard */}
             <div className="container mx-auto p-4 font-poppins">
-                <h2 className="text-center text-3xl font-extrabold text-primary mb-6 mt-5">Reserva tu habitación</h2>
+                <h2 className="text-center text-3xl font-extrabold text-primary mb-6 mt-5">Compra tu ropa favorita</h2>
                 
                 <div className="mb-8">
-                    <h3 className="text-xl font-semibold">Descripción de la habitación:</h3>
-                    <p>{roomDescriptions[selectedRoom]}</p>
-                    <p><strong>Precio por noche:</strong> ${roomPrices[selectedRoom]}</p>
+                    <h3 className="text-xl font-semibold">Descripción del producto:</h3>
+                    <p>{productDescriptions[selectedProduct]}</p>
+                    <p><strong>Precio por unidad:</strong> ${productPrices[selectedProduct]}</p>
                 </div>
 
                 <div className="mb-6">
-                    <label htmlFor="room" className="block text-base font-semibold text-gray-700">Selecciona el tipo de habitación:</label>
+                    <label htmlFor="product" className="block text-base font-semibold text-gray-700">Selecciona el producto:</label>
                     <select
-                        id="room"
-                        value={selectedRoom}
-                        onChange={(e) => setSelectedRoom(e.target.value)}
+                        id="product"
+                        value={selectedProduct}
+                        onChange={(e) => setSelectedProduct(e.target.value)}
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                     >
-                        <option value="single">Habitación Estándar</option>
-                        <option value="double">Suite Deluxe</option>
-                        <option value="suite">Suite Presidencial</option>
+                        <option value="shirt">Camisa</option>
+                        <option value="jeans">Jeans</option>
+                        <option value="dress">Vestido</option>
+                        <option value="jacket">Chaqueta</option>
                     </select>
                 </div>
 
                 <div className="mb-6">
-                    <label htmlFor="checkIn" className="block text-base font-semibold text-gray-700">Fecha de entrada:</label>
-                    <input
-                        type="date"
-                        id="checkIn"
-                        value={checkInDate}
-                        onChange={(e) => setCheckInDate(e.target.value)}
+                    <label htmlFor="size" className="block text-base font-semibold text-gray-700">Selecciona la talla:</label>
+                    <select
+                        id="size"
+                        value={selectedSize}
+                        onChange={(e) => setSelectedSize(e.target.value)}
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                    />
+                    >
+                        <option value="">Selecciona una talla</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
                 </div>
 
                 <div className="mb-6">
-                    <label htmlFor="checkOut" className="block text-base font-semibold text-gray-700">Fecha de salida:</label>
+                    <label htmlFor="quantity" className="block text-base font-semibold text-gray-700">Cantidad:</label>
                     <input
-                        type="date"
-                        id="checkOut"
-                        value={checkOutDate}
-                        onChange={(e) => setCheckOutDate(e.target.value)}
+                        type="number"
+                        id="quantity"
+                        value={quantity}
+                        onChange={(e) => setQuantity(Number(e.target.value))}
+                        min="1"
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
                 </div>
@@ -195,13 +179,13 @@ export default function Dashboard() {
                     </div>
                 )}
 
-                {showConfirmButton && (
+                {totalPrice > 0 && (
                     <div className="mb-6">
                         <button
-                            onClick={confirmReservation}
+                            onClick={confirmPurchase}
                             className="w-full py-2 px-4 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600"
                         >
-                            Confirmar Reserva
+                            Confirmar Compra
                         </button>
                     </div>
                 )}
